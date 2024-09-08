@@ -1,0 +1,3 @@
+interface FoodItemFactory {
+    FoodItem createFoodItem();
+}
