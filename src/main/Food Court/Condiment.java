@@ -1,0 +1,3 @@
+interface Condiment {
+    String getDescription();
+}
