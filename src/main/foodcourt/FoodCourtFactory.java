@@ -1,3 +1,5 @@
+package foodcourt;
+
 public class FoodCourtFactory {
     public FoodItem createFoodItem(String type) {
         switch (type.toLowerCase()) {

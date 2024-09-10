@@ -1,10 +1,19 @@
-// ReportVisitor.java
-//This visitor will generate a report of all stock items.
+package main.Flyweight;
+
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReportVisitor implements Visitor {
     private List<String> report = new ArrayList<>();
+    private TextArea logArea;
+
+    // Constructor to pass TextArea for logging
+    public ReportVisitor(TextArea logArea) {
+        this.logArea = logArea;
+    }
 
     @Override
     public void visit(StockItem stockItem) {
@@ -16,9 +25,14 @@ public class ReportVisitor implements Visitor {
     }
 
     public void printReport() {
-        System.out.println("Stock Report:");
+        log("Stock Report:");
         for (String entry : report) {
-            System.out.println(entry);
+            log(entry);
         }
+    }
+
+    // Logging method
+    private void log(String message) {
+        Platform.runLater(() -> logArea.appendText(message + "\n"));
     }
 }

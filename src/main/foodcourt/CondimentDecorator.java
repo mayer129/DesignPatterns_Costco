@@ -1,3 +1,5 @@
+package foodcourt;
+
 public abstract class CondimentDecorator implements FoodItem {
     protected FoodItem foodItem;
 

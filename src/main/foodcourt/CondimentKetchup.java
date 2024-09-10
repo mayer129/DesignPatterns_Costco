@@ -1,3 +1,5 @@
+package foodcourt;
+
 public class CondimentKetchup extends CondimentDecorator {
     public CondimentKetchup(FoodItem foodItem) {
         super(foodItem);

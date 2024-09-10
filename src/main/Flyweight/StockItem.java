@@ -1,4 +1,5 @@
 // StockItem.java
+package main.Flyweight;
 //This class contains extrinsic data (SKU, quantity) that is unique to each stock item.
 // The product information (description, price) is shared via the ProductInfo flyweight.
 public class StockItem {

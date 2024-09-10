@@ -1,15 +1,15 @@
-// Level1Support.java
+package app;
 public class Level1Support extends SupportHandler {
 
     @Override
-    public void handleRequest(SupportRequest request) {
+    public void handleRequest(SupportRequest request, javafx.scene.control.TextArea logArea) {
         if (request.getIssueType().equalsIgnoreCase("basic")) {
-            System.out.println("Level 1 Support: Handling basic request -> " + request.getDescription());
+            logArea.appendText("Level 1 Support: Handling basic request -> " + request.getDescription() + "\n");
         } else {
             if (nextHandler != null) {
-                nextHandler.handleRequest(request);
+                nextHandler.handleRequest(request, logArea);
             } else {
-                System.out.println("No handler found for the request: " + request.getDescription());
+                logArea.appendText("No handler found for the request: " + request.getDescription() + "\n");
             }
         }
     }

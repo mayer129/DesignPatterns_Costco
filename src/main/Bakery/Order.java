@@ -1,3 +1,5 @@
+package bakery;
+
 public class Order {
     private static long orderCounter = 0;
     private long orderNumber;

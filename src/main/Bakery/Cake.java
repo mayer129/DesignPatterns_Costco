@@ -1,3 +1,5 @@
+package bakery;
+
 public class Cake {
     private String color;
     private String flavor;

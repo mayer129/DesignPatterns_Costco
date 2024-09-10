@@ -1,3 +1,5 @@
+package bakery;
+
 public class OrderMemento {
     private final String status;
 

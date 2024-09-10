@@ -1,15 +1,15 @@
-// Level3Support.java
+package app;
 public class Level3Support extends SupportHandler {
 
     @Override
-    public void handleRequest(SupportRequest request) {
+    public void handleRequest(SupportRequest request, javafx.scene.control.TextArea logArea) {
         if (request.getIssueType().equalsIgnoreCase("advanced")) {
-            System.out.println("Level 3 Support: Handling advanced request -> " + request.getDescription());
+            logArea.appendText("Level 3 Support: Handling advanced request -> " + request.getDescription() + "\n");
         } else {
             if (nextHandler != null) {
-                nextHandler.handleRequest(request);
+                nextHandler.handleRequest(request, logArea);
             } else {
-                System.out.println("No handler found for the request: " + request.getDescription());
+                logArea.appendText("No handler found for the request: " + request.getDescription() + "\n");
             }
         }
     }

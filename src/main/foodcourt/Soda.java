@@ -1,3 +1,5 @@
+package foodcourt;
+
 public class Soda {
     private String flavor;
 

@@ -1,7 +1,7 @@
 package employees;
 
 public abstract class Employee {
-    public String name;
+    public String name;  // Change this to protected
     protected String employeeID;
     protected boolean accessGranted = false;
 
@@ -12,6 +12,10 @@ public abstract class Employee {
 
     public String getEmployeeID() {
         return employeeID;
+    }
+
+    public String getName() {
+        return name;  // Getter method for name
     }
 
     public boolean isAccessGranted() {

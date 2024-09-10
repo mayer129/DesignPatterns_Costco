@@ -1,6 +1,8 @@
-// ProductCategory.java
-//This represents categories like Groceries and Toiletries,
-// and can hold both individual products and sub-categories.
+package composite;
+
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,20 +25,15 @@ public class ProductCategory extends ProductComponent {
     }
 
     @Override
-    public ProductComponent getChild(int index) {
-        return productComponents.get(index);
-    }
-
-    @Override
     public String getName() {
         return categoryName;
     }
 
     @Override
-    public void displayInfo() {
-        System.out.println("Category: " + getName());
+    public void displayInfo(TextArea logArea) {
+        log("Category: " + getName(), logArea);
         for (ProductComponent productComponent : productComponents) {
-            productComponent.displayInfo();
+            productComponent.displayInfo(logArea);
         }
     }
 
@@ -47,5 +44,10 @@ public class ProductCategory extends ProductComponent {
             totalPrice += productComponent.getTotalPrice();
         }
         return totalPrice;
+    }
+
+    // Log messages to TextArea
+    private void log(String message, TextArea logArea) {
+        Platform.runLater(() -> logArea.appendText(message + "\n"));
     }
 }

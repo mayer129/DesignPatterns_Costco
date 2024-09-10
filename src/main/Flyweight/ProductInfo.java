@@ -1,4 +1,5 @@
 // ProductInfo.java
+package main.Flyweight;
 //This class contains the intrinsic data that will be shared: product description and price.
 public class ProductInfo {
     private String description;

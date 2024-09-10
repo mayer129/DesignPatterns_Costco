@@ -1,5 +1,6 @@
 // VisitableStockManager.java
 //This class manages the collection of stock items and allows visitors to visit them.
+package main.Flyweight;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,23 +1,35 @@
-// ProductFactory.java
-//The factory is responsible for creating and managing flyweight objects.
-// It ensures that the same ProductInfo object is reused for items with the
-// same description and price.
+package main.Flyweight;
+
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ProductFactory {
     private Map<String, ProductInfo> productInfoMap = new HashMap<>();
+    private TextArea logArea;
+
+    // Constructor accepts TextArea for logging
+    public ProductFactory(TextArea logArea) {
+        this.logArea = logArea;
+    }
 
     public ProductInfo getProductInfo(String description, double price) {
         String key = description + price;
         if (!productInfoMap.containsKey(key)) {
             productInfoMap.put(key, new ProductInfo(description, price));
-            System.out.println("Created new ProductInfo for: " + description);
+            log("Created new ProductInfo for: " + description);
         }
         return productInfoMap.get(key);
     }
 
     public int getTotalProductsCreated() {
         return productInfoMap.size();
+    }
+
+    // Logging method
+    private void log(String message) {
+        Platform.runLater(() -> logArea.appendText(message + "\n"));
     }
 }

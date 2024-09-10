@@ -1,4 +1,5 @@
-// SupportRequest.java
+package app;
+
 public class SupportRequest {
     private String issueType;
     private String description;

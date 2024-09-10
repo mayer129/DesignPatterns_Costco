@@ -1,6 +1,7 @@
-// ProductComponent.java
-//The base interface defines the common methods for both leaf nodes
-//(individual items) and composite nodes (categories).
+package composite;
+
+import javafx.scene.control.TextArea;
+
 public abstract class ProductComponent {
     public void add(ProductComponent productComponent) {
         throw new UnsupportedOperationException();
@@ -22,7 +23,7 @@ public abstract class ProductComponent {
         throw new UnsupportedOperationException();
     }
 
-    public void displayInfo() {
+    public void displayInfo(TextArea logArea) {
         throw new UnsupportedOperationException();
     }
 

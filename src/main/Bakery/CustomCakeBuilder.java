@@ -1,3 +1,5 @@
+package bakery;
+
 public class CustomCakeBuilder implements CakeBuilder {
     private Cake cake;
 

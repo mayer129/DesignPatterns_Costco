@@ -1,6 +1,8 @@
-// ProductItem.java
-//This represents individual products like groceries (e.g., apples, milk)
-//and toiletries (e.g., shampoo, soap). Each product has a name and price.
+package composite;
+
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
+
 public class ProductItem extends ProductComponent {
     private String name;
     private double price;
@@ -21,12 +23,17 @@ public class ProductItem extends ProductComponent {
     }
 
     @Override
-    public void displayInfo() {
-        System.out.println("Product: " + getName() + ", Price: $" + getPrice());
+    public void displayInfo(TextArea logArea) {
+        log("Product: " + name + " - Price: $" + price, logArea);
     }
 
     @Override
     public double getTotalPrice() {
-        return getPrice();
+        return price;
+    }
+
+    // Log messages to TextArea
+    private void log(String message, TextArea logArea) {
+        Platform.runLater(() -> logArea.appendText(message + "\n"));
     }
 }

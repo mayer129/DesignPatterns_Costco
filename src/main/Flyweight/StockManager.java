@@ -1,6 +1,7 @@
 // StockManager.java
 //This class is the client that creates stock items and retrieves
 //shared product information via the ProductFactory.
+package main.Flyweight;
 import java.util.ArrayList;
 import java.util.List;
 

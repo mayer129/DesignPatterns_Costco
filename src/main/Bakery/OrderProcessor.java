@@ -1,27 +1,43 @@
+package bakery;
+
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class OrderProcessor {
     private final Queue<Order> orderQueue = new LinkedList<>();
     private final OrderCaretaker caretaker = new OrderCaretaker();
+    private TextArea logArea;  // Add TextArea for logging
 
+    // Constructor to accept TextArea for logging
+    public OrderProcessor(TextArea logArea) {
+        this.logArea = logArea;
+    }
+
+    // Method to add an order
     public void addOrder(Order order) {
         orderQueue.offer(order);
         caretaker.addMemento(order.getOrderNumber(), order.saveState());
-        System.out.println("Order added to queue: " + order);
+        log("Order added to queue: " + order);
     }
 
+    // Method to process all orders
     public void processOrders() {
+        log("\n--- Processing Orders ---");  // Add space for better readability
         while (!orderQueue.isEmpty()) {
             Order order = orderQueue.poll();
             processOrder(order);
         }
+        log("--- All Orders Processed ---");
     }
 
+    // Method to process a single order
     private void processOrder(Order order) {
         String[] stages = {"Mixing", "Baking", "Decorating", "Boxing"};
         for (String stage : stages) {
-            System.out.println("Starting " + stage + " for " + order);
+            log("Starting " + stage + " for " + order);
             updateOrderStatus(order, stage + " In Progress");
             simulateProcessing();
 
@@ -33,19 +49,21 @@ public class OrderProcessor {
                     return;
                 }
             } else {
-                System.out.println("Completed " + stage + " for " + order);
+                log("Completed " + stage + " for " + order);
             }
         }
         updateOrderStatus(order, "Ready");
-        System.out.println("Order completed: " + order);
+        log("Order completed: " + order);
     }
 
+    // Method to update the order status and save the state
     private void updateOrderStatus(Order order, String status) {
         caretaker.addMemento(order.getOrderNumber(), order.saveState());
         order.setStatus(status);
-        System.out.println("Updated " + order);
+        log("Updated " + order);
     }
 
+    // Simulate processing with a delay
     private void simulateProcessing() {
         try {
             Thread.sleep(1000); // Simulate processing time
@@ -54,15 +72,21 @@ public class OrderProcessor {
         }
     }
 
+    // Handle issues during the order processing
     private void handleIssue(Order order, String stage) {
-        System.out.println("Issue found with " + order + " ~ Let me make you a new one!");
+        log("Issue found with " + order + " during " + stage + " ~ Let me make you a new one!");
         OrderMemento previousState = caretaker.getMemento(order.getOrderNumber());
         if (previousState != null) {
             order.restoreState(previousState);
-            System.out.println("Order reverted to previous state: " + order);
+            log("Order reverted to previous state: " + order);
         } else {
-            System.out.println("Unable to revert order state. Restarting from the beginning.");
+            log("Unable to revert order state. Restarting from the beginning.");
             order.setStatus("Queued");
         }
+    }
+
+    // Utility method to log messages to the TextArea
+    private void log(String message) {
+        Platform.runLater(() -> logArea.appendText(message + "\n"));
     }
 }
