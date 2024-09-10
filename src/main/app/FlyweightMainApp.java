@@ -65,11 +65,13 @@ public class FlyweightMainApp extends Application {
 
     // Method to add stock items using Flyweight pattern
     private void addStockItems() {
-        // Add stock items to the stock manager
-        stockManager.addStockItem(new StockItem("SKU123", 50, productFactory.getProductInfo("Apple iPhone 13", 999.99)));
-        stockManager.addStockItem(new StockItem("SKU124", 20, productFactory.getProductInfo("Apple iPhone 13", 999.99)));  // Reuses ProductInfo
-        stockManager.addStockItem(new StockItem("SKU125", 150, productFactory.getProductInfo("Samsung Galaxy S21", 799.99)));
-        stockManager.addStockItem(new StockItem("SKU126", 5, productFactory.getProductInfo("Apple Watch", 399.99)));
+        // Add stock items that reuse the same ProductInfo (Flyweight)
+        // Different locations/warehouses, same product
+        stockManager.addStockItem(new StockItem("SKU123-WarehouseA", 50, productFactory.getProductInfo("Apple iPhone 13", 999.99)));
+        stockManager.addStockItem(new StockItem("SKU123-StoreB", 20, productFactory.getProductInfo("Apple iPhone 13", 999.99)));  // Reuse Flyweight
+        stockManager.addStockItem(new StockItem("SKU125-WarehouseA", 150, productFactory.getProductInfo("Samsung Galaxy S21", 799.99)));
+        stockManager.addStockItem(new StockItem("SKU126-StoreC", 5, productFactory.getProductInfo("Apple Watch", 399.99)));
+        stockManager.addStockItem(new StockItem("SKU123-StoreC", 30, productFactory.getProductInfo("Apple iPhone 13", 999.99)));  // Reuse Flyweight again
 
         // Log the flyweight pattern result
         log("Total unique ProductInfo objects created (Flyweight pattern): " + productFactory.getTotalProductsCreated());

@@ -24,7 +24,7 @@ public class ProductItem extends ProductComponent {
 
     @Override
     public void displayInfo(TextArea logArea) {
-        log("Product: " + name + " - Price: $" + price, logArea);
+        log("Product: " + name + " - Price: $" + String.format("%.2f", price), logArea);
     }
 
     @Override

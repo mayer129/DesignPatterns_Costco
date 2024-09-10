@@ -15,6 +15,7 @@ public class StockManager {
 
     public void addStockItem(String sku, int quantity, String description, double price) {
         ProductInfo productInfo = productFactory.getProductInfo(description, price);
+
         StockItem stockItem = new StockItem(sku, quantity, productInfo);
         stockItems.add(stockItem);
     }
