@@ -1,6 +1,9 @@
 package app;
+import main.app.*;
 
 import javafx.stage.Stage;
+import main.app.BakerySimulator;
+import main.wifi.WifiMainApp;
 
 public class CostcoFacade {
 
@@ -13,6 +16,7 @@ public class CostcoFacade {
             e.printStackTrace();
         }
     }
+
 
     // Method to open the Customer Support Department
     public void openSupport(Stage stage) {
@@ -89,6 +93,16 @@ public class CostcoFacade {
         try {
             IteratorMainApp iteratorApp = new IteratorMainApp();
             iteratorApp.start(stage);  // Use the IteratorMainApp's start method
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to open the Tesla Charging (Adapter) Demo
+    public void openAdapterDemo(Stage stage) {
+        try {
+            AdapterMainApp adapterApp = new AdapterMainApp();
+            adapterApp.start(stage);  // Use the AdapterMainApp's start method
         } catch (Exception e) {
             e.printStackTrace();
         }

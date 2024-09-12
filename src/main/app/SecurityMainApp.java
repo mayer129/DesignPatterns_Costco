@@ -6,14 +6,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import security.WalkieTalkieHub;
-import security.SecurityPersonnel;
-import security.Guard;
-import security.Supervisor;
-import strategy.StandardResponse;
-import strategy.LockdownResponse;
-import strategy.EmergencyResponse;
-import strategy.ResponseStrategy;
+import main.security.WalkieTalkieHub;
+import main.security.SecurityPersonnel;
+import main.security.Guard;
+import main.security.Supervisor;
+import main.strategy.StandardResponse;
+import main.strategy.LockdownResponse;
+import main.strategy.EmergencyResponse;
+import main.strategy.ResponseStrategy;
 
 public class SecurityMainApp extends Application {
 

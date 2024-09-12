@@ -1,4 +1,4 @@
-package payment;
+package main.payment;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
@@ -19,7 +19,7 @@ public class PaymentProcessorPool {
 
         // Initialize the pool with payment processors
         for (int i = 0; i < poolSize; i++) {
-            availableProcessors.add(new payment.CreditCardPaymentProcessor(logArea));
+            availableProcessors.add(new main.payment.CreditCardPaymentProcessor(logArea));
             log("Created initial PaymentProcessor #" + (i + 1));
         }
     }
@@ -38,7 +38,7 @@ public class PaymentProcessorPool {
         if (processor == null) {
             // Pool is exhausted, create a new processor
             log("Pool exhausted! Creating a new PaymentProcessor.");
-            processor = new payment.CreditCardPaymentProcessor(logArea);
+            processor = new main.payment.CreditCardPaymentProcessor(logArea);
         } else {
             log("Borrowing a PaymentProcessor from the pool.");
         }

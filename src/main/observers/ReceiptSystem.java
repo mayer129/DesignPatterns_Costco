@@ -1,4 +1,4 @@
-package observers;
+package main.observers;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;

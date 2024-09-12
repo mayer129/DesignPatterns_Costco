@@ -1,9 +1,5 @@
-package app;
+package main.app;
 
-import bakery.OrderProcessor;
-import bakery.OrderInterpreter;
-import bakery.Cake;
-import bakery.Order;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -11,55 +7,40 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.util.Scanner;
-
-import java.util.List;
+import main.Bakery.*;
 
 public class BakerySimulator extends Application {
 
-    /*private OrderProcessor processor;  // Now we will initialize this later
-    private static final OrderInterpreter interpreter = new OrderInterpreter();
+    private static BakeryMediator mediator;
     private TextArea logArea;
-
-    public static void main(String[] args) {
-        launch(args);  // Launch JavaFX application
-    }
 
     @Override
     public void start(Stage primaryStage) {
         // Initialize log area for logging actions
         logArea = new TextArea();
-        logArea.setEditable(false);
+        logArea.setEditable(false);  // Make the log area read-only
         logArea.setPrefHeight(400);
 
-        // Initialize processor with logArea
-        processor = new OrderProcessor(logArea);
-
         Label titleLabel = new Label("Welcome to the Costco Bakery!");
+
+        // Initialize processor and interpreter with logArea
+        OrderProcessor processor = new CustomCakeOrderProcessor(logArea);
+        OrderInterpreter interpreter = new OrderInterpreter();
+        mediator = new BakeryMediator(processor, interpreter, logArea);  // Pass logArea to the mediator
 
         // Buttons for placing orders, processing orders, and exiting
         Button placeOrderBtn = new Button("Place an Order");
         Button processOrderBtn = new Button("Process Orders");
         Button exitBtn = new Button("Exit");
 
-        // Order input field
-        TextField orderInputField = new TextField();
-        orderInputField.setPromptText("Enter your cake order (e.g., '1 red chocolate cake, 2 white vanilla cakes')");
-
         // Layout for UI elements
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20));
-        layout.getChildren().addAll(titleLabel, orderInputField, placeOrderBtn, processOrderBtn, exitBtn, logArea);
+        layout.getChildren().addAll(titleLabel, placeOrderBtn, processOrderBtn, logArea, exitBtn);
 
         // Event handling for buttons
-        placeOrderBtn.setOnAction(event -> {
-            String orderInput = orderInputField.getText();
-            placeOrder(orderInput);
-            orderInputField.clear();  // Clear input after order is placed
-        });
-
-        processOrderBtn.setOnAction(event -> processOrders());
-
+        placeOrderBtn.setOnAction(event -> placeOrderUI());
+        processOrderBtn.setOnAction(event -> processOrdersUI());
         exitBtn.setOnAction(event -> {
             log("Thank you for visiting the Costco Bakery. Goodbye!");
             Platform.exit();  // Exit the application
@@ -72,80 +53,25 @@ public class BakerySimulator extends Application {
         primaryStage.show();
     }
 
-    // Method to place an order
-    private void placeOrder(String orderInput) {
-        log("\n--- Placing Order ---");  // Add spacing before the section
+    // Method to handle placing an order via the UI
+    private void placeOrderUI() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Place an Order");
+        dialog.setHeaderText("Enter your cake order (e.g., '1 red chocolate cake, 2 white vanilla cakes')");
+        dialog.setContentText("Order:");
 
-        List<Cake> cakes = interpreter.interpret(orderInput);
-
-        if (cakes.isEmpty()) {
-            log("Invalid order. Please try again.");
-            return;
-        }
-
-        for (Cake cake : cakes) {
-            Order order = new Order(cake);
-            processor.addOrder(order);
-            log("Order placed: " + order + " - Price: $15.00");
-        }
+        dialog.showAndWait().ifPresent(orderInput -> {
+            log("\n--- Placing Order ---");
+            mediator.placeOrder(orderInput);
+        });
     }
 
-    // Method to process orders
-    private void processOrders() {
-        log("\n--- Processing Orders ---");  // Add spacing before the section
-        processor.processOrders();
-    }*/
-
-    // The main simulator class using the Mediator pattern to manage interactions
-    public class BakerySimulator {
-        private static final BakeryMediator mediator;
-        private static final Scanner scanner = new Scanner(System.in);
-        private static PricingStrategy pricingStrategy = new FlatRatePricingStrategy(); // Default pricing strategy
-
-        // Static block to initialize the mediator with processor and interpreter
-        static {
-            OrderProcessor processor = new CustomCakeOrderProcessor(); // Uses custom order processor
-            OrderInterpreter interpreter = new OrderInterpreter(); // Uses order interpreter
-            mediator = new BakeryMediator(processor, interpreter); // Mediator to coordinate interactions
-        }
-
-        public static void main(String[] args) {
-            System.out.println("Welcome to the Costco Bakery!");
-
-            // Main loop for user interaction
-            while (true) {
-                System.out.println("\nWhat would you like to do?");
-                System.out.println("1. Place an order");
-                System.out.println("2. Process orders");
-                System.out.println("3. Exit");
-
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (choice) {
-                    case 1:
-                        placeOrder(); // Place a new order
-                        break;
-                    case 2:
-                        mediator.processOrders(); // Process all orders in the queue
-                        break;
-                    case 3:
-                        System.out.println("Thank you for visiting the Costco Bakery. Goodbye!");
-                        return; // Exit the program
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
-                }
-            }
-        }
-
-        // Method to place an order using the mediator
-        private static void placeOrder() {
-            System.out.println("Enter your cake order (e.g., '1 red chocolate cake, 2 white vanilla cakes'):");
-            String orderInput = scanner.nextLine(); // Get user input
-
-            mediator.placeOrder(orderInput); // Place the order through the mediator
-        }
+    // Method to process orders via the UI
+    private void processOrdersUI() {
+        log("\n--- Processing Orders ---");
+        mediator.processOrders();
     }
+
     // Utility method to log messages to the TextArea
     private void log(String message) {
         Platform.runLater(() -> logArea.appendText(message + "\n"));

@@ -1,6 +1,6 @@
-package access;
+package main.access;
 
-import employees.Employee;
+import main.employees.Employee;
 import java.util.HashMap;
 import java.util.Map;
 

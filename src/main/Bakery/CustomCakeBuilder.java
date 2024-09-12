@@ -1,4 +1,4 @@
-package bakery;
+package main.Bakery;
 
 public class CustomCakeBuilder implements CakeBuilder {
     private Cake cake;

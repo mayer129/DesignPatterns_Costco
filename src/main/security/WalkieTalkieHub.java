@@ -1,4 +1,4 @@
-package security;
+package main.security;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;

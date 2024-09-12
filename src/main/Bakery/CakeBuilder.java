@@ -1,4 +1,4 @@
-package bakery;
+package main.Bakery;
 
 public interface CakeBuilder {
     void setColor(String color);

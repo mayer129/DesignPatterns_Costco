@@ -1,6 +1,6 @@
-package strategy;
+package main.strategy;
 
-import security.SecurityPersonnel;
+import main.security.SecurityPersonnel;
 
 public interface ResponseStrategy {
     void respond(String alertDetails, SecurityPersonnel personnel);

@@ -1,6 +1,6 @@
-package strategy;
+package main.strategy;
 
-import security.SecurityPersonnel;
+import main.security.SecurityPersonnel;
 
 public class EmergencyResponse implements ResponseStrategy {
     @Override

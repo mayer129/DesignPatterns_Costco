@@ -1,4 +1,4 @@
-package bakery;
+package main.Bakery;
 
 public class Cake {
     private String color;
@@ -10,6 +10,14 @@ public class Cake {
 
     public void setFlavor(String flavor) {
         this.flavor = flavor;
+    }
+
+    public String getFlavor() {
+        return this.flavor;
+    }
+
+    public String getColor() {
+        return this.color;
     }
 
     @Override

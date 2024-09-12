@@ -1,12 +1,12 @@
-package employees;
+package main.employees;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 import java.util.ArrayList;
 import java.util.List;
-import observers.Observer;
-import payment.PaymentProcessor;
-import payment.PaymentProcessorPool;
+import main.observers.Observer;
+import main.payment.PaymentProcessor;
+import main.payment.PaymentProcessorPool;
 
 public class Cashier extends Employee implements Subject {
 

@@ -1,7 +1,7 @@
 // Subject Interface
-package employees;
+package main.employees;
 
-import observers.Observer;
+import main.observers.Observer;
 
 public interface Subject {
     void registerObserver(Observer observer);

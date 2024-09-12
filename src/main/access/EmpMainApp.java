@@ -1,20 +1,19 @@
-package app;
+package main.access;
 
 import main.employees.Cashier;
 import main.employees.Employee;
 import main.employees.Manager;
 import factories.EmployeeFactory;
-import main.access.AccessControlManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.payment.PaymentProcessorPool;
 import main.observers.BillingSystem;
 import main.observers.InventorySystem;
 import main.observers.ReceiptSystem;
+import main.payment.PaymentProcessorPool;
 
 import java.util.HashMap;
 import java.util.Map;

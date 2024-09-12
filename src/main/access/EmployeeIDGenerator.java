@@ -1,4 +1,4 @@
-package access;
+package main.access;
 
 import java.util.Random;
 

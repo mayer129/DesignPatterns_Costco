@@ -1,4 +1,4 @@
-package employees;
+package main.employees;
 
 public abstract class Employee {
     public String name;  // Change this to protected

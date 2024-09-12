@@ -1,4 +1,4 @@
-package payment;
+package main.payment;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;

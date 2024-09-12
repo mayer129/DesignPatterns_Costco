@@ -1,9 +1,9 @@
 package factories;
 
-import employees.Employee;
-import employees.Manager;
-import employees.Cashier;
-import access.EmployeeIDGenerator;
+import main.employees.Employee;
+import main.employees.Manager;
+import main.employees.Cashier;
+import main.access.EmployeeIDGenerator;
 import javafx.scene.control.TextArea;
 
 public class EmployeeFactory {

@@ -1,4 +1,4 @@
-package app;
+package main.wifi;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -6,44 +6,37 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import wifi.WiFiAccess;
-import wifi.WiFiProxy;
+import main.wifi.WiFiProxy;
 
 public class WifiMainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Create the WiFi Proxy
-        WiFiAccess wifiProxy = new WiFiProxy();
+        primaryStage.setTitle("Costco Wi-Fi Access");
 
-        // Create the UI components
         Label nameLabel = new Label("Enter your name:");
         TextField nameField = new TextField();
-        CheckBox agreeCheckBox = new CheckBox("I agree to the store's data collection policy.");
-        Button connectButton = new Button("Request Wi-Fi Access");
-        Label resultLabel = new Label();
+        nameField.setPromptText("Customer Name");
 
-        // Handle button click event
-        connectButton.setOnAction(event -> {
+        CheckBox agreementCheckBox = new CheckBox("I agree to the store's data collection policy.");
+
+        Button accessButton = new Button("Request Wi-Fi Access");
+        TextArea logArea = new TextArea();
+        logArea.setEditable(false);  // Ensure the log area is not editable
+
+        accessButton.setOnAction(event -> {
             String customerName = nameField.getText();
-            boolean agreedToPolicy = agreeCheckBox.isSelected();  // Check the checkbox status
+            boolean hasAgreed = agreementCheckBox.isSelected();  // Corrected case for agreementCheckBox
 
-            // Only grant access if the checkbox is selected
-            if (agreedToPolicy) {
-                wifiProxy.grantAccess(customerName);  // Call the WiFiProxy to grant access
-                resultLabel.setText("Wi-Fi access granted to " + customerName + ".");
-            } else {
-                resultLabel.setText("Access denied. You must agree to the data collection policy.");
-            }
+            WiFiProxy proxy = new WiFiProxy(hasAgreed, logArea);
+            proxy.grantAccess(customerName);
         });
 
-        // Set up the layout
-        VBox layout = new VBox(10, nameLabel, nameField, agreeCheckBox, connectButton, resultLabel);
+        VBox layout = new VBox(10);
         layout.setPadding(new Insets(20));
+        layout.getChildren().addAll(nameLabel, nameField, agreementCheckBox, accessButton, logArea);
 
-        // Create and set the scene
-        Scene scene = new Scene(layout, 400, 250);
-        primaryStage.setTitle("Wi-Fi Access System");
+        Scene scene = new Scene(layout, 400, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

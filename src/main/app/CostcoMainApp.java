@@ -1,5 +1,7 @@
 package app;
 
+import main.app.*;
+
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -59,9 +61,10 @@ public class CostcoMainApp extends Application {
         Button wifiBtn = createDepartmentButton("WiFi Access", "#7DCEA0"); // Olive Green
         Button empManageBtn = createDepartmentButton("Employee Management", "#48C9B0"); // Teal Blue
         Button catalogBtn = createDepartmentButton("Product Catalog", "#85C1E9"); // Powder Blue
-        Button flyweightDemoBtn = createDepartmentButton("Discount Demo", "#C39BD3"); // Lavender
+        Button flyweightDemoBtn = createDepartmentButton("Flyweight Demo", "#C39BD3"); // Lavender
         Button foodCourtBtn = createDepartmentButton("Food Court", "#A99A86"); // Warm Taupe
         Button iteratorDemoBtn = createDepartmentButton("Iterator Demo", "#2C3E50"); // Charcoal Grey
+        Button adapterDemoBtn = createDepartmentButton("Tesla Charging (Adapter)", "#884D5E"); // Bright Orange
 
         // Add department buttons to the grid (3x3 layout)
         grid.add(bakeryBtn, 0, 1);          // Row 1, Col 1
@@ -73,6 +76,7 @@ public class CostcoMainApp extends Application {
         grid.add(flyweightDemoBtn, 0, 3);   // Row 3, Col 1
         grid.add(foodCourtBtn, 1, 3);       // Row 3, Col 2
         grid.add(iteratorDemoBtn, 2, 3);    // Row 3, Col 3
+        grid.add(adapterDemoBtn, 1, 4);     // Row 4, Col 1 (New Adapter Button)
 
         // Set button actions to open respective departments (new windows)
         bakeryBtn.setOnAction(event -> openBakeryWindow());
@@ -83,7 +87,8 @@ public class CostcoMainApp extends Application {
         catalogBtn.setOnAction(event -> openCatalogWindow());
         flyweightDemoBtn.setOnAction(event -> openFlyweightDemoWindow());
         foodCourtBtn.setOnAction(event -> openFoodCourtWindow());
-        iteratorDemoBtn.setOnAction(event -> openIteratorDemoWindow());  // New action for Iterator demo
+        iteratorDemoBtn.setOnAction(event -> openIteratorDemoWindow());
+        adapterDemoBtn.setOnAction(event -> openAdapterDemoWindow());  // New action for Adapter demo
 
         // Set the scene and show the stage
         Scene scene = new Scene(grid);
@@ -177,5 +182,10 @@ public class CostcoMainApp extends Application {
     private void openIteratorDemoWindow() {
         Stage iteratorStage = new Stage();
         facade.openIteratorDemo(iteratorStage);  // Opens the Iterator Demo
+    }
+
+    private void openAdapterDemoWindow() {
+        Stage adapterStage = new Stage();
+        facade.openAdapterDemo(adapterStage);  // Opens the Tesla Charging Adapter Demo
     }
 }

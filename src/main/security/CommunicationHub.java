@@ -1,4 +1,4 @@
-package security;
+package main.security;
 
 public interface CommunicationHub {
     void broadcastMessage(String message, SecurityPersonnel sender);

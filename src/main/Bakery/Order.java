@@ -1,4 +1,4 @@
-package bakery;
+package main.Bakery;
 
 public class Order {
     private static long orderCounter = 0;

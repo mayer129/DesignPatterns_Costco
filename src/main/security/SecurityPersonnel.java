@@ -1,6 +1,6 @@
-package security;
+package main.security;
 
-import strategy.ResponseStrategy;
+import main.strategy.ResponseStrategy;
 
 public abstract class SecurityPersonnel {
     protected String name;

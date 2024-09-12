@@ -1,4 +1,4 @@
-package bakery;
+package main.Bakery;
 
 public class OrderMemento {
     private final String status;
