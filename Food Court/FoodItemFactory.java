@@ -1,3 +1,0 @@
-interface FoodItemFactory {
-    FoodItem createFoodItem();
-}
